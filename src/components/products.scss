@@ -42,6 +42,9 @@
   background: grey;
   color: white;
   font-weight: bold;
+  & > div {
+    border-color: white;
+  }
 }
 
 .product-table {

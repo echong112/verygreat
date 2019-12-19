@@ -26,10 +26,13 @@ class Product extends React.Component{
     this.setState({featured_image: this.props.currentItem.featured_image});
     this.setState({item: this.props.currentItem});
     this.setState({price: `$ ${this.props.currentItem.price / 100}`});
-    this.setState({colors: Object.values(this.props.currentItem.colors)}, () => {
-      this.setState({colorText: this.state.colors.length > 0 ? `${this.state.colors.length} Colors Available` : 'No Colors'})
-    });
     this.setState({colorsKeys: Object.keys(this.props.currentItem.colors)});
+
+    let colors = Object.values(this.props.currentItem.colors);
+    this.setState({colors: colors});
+    if (colors.length > 0) {
+      this.setState({colorText: `${colors.length} Colors Available`})
+    }
   }
 
   handleHover = (item) => {
@@ -50,22 +53,22 @@ class Product extends React.Component{
         <div>{this.state.price}</div>
         <div className="img">
         <p>{this.state.colorText}</p>
-          {this.state.colors.length > 0 && (
-            <div className="colors">
-              {this.state.colors && this.state.colors.map((color, i) => {
-                return (
-                  <div key={i}
-                    onClick={this.handleClickedColor.bind(this, color)}
-                    onMouseEnter={this.handleHover.bind(this, color)}
-                    className="color-box"
-                    style={{
-                      background: colorMap.get(this.state.colorsKeys[i]),
-                    }}>
-                  </div>
-                )
-              })}
-            </div>
-          )}
+        {this.state.colors.length > 0 && (
+          <div className="colors">
+            {this.state.colors && this.state.colors.map((color, i) => {
+              return (
+                <div key={i}
+                  onClick={this.handleClickedColor.bind(this, color)}
+                  onMouseEnter={this.handleHover.bind(this, color)}
+                  className="color-box"
+                  style={{
+                    background: colorMap.get(this.state.colorsKeys[i]),
+                  }}>
+                </div>
+              )
+            })}
+          </div>
+        )}
         </div>
       </div>
     )
