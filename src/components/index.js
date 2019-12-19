@@ -1,7 +1,16 @@
 import React from "react";
-import './products.scss';
+import Product from './product';
 const productLibrary = require( "../util/product-library.js" );
 let products = productLibrary.getProducts();
+
+const colorMap = new Map();
+
+colorMap.set('Tan', '#D2B48C')
+colorMap.set('Navy', '#000080')
+colorMap.set('Blush', '#de5d83')
+colorMap.set('Red', '#ff0000')
+colorMap.set('Black', '#000000')
+colorMap.set('Gray', '#808080')
 
 class Index extends React.Component{
   constructor(){
@@ -9,6 +18,10 @@ class Index extends React.Component{
     this.state = {
       products: products
     }
+  }
+
+  handleHover = () => {
+    console.log('hover');
   }
 
   render(){
@@ -24,20 +37,7 @@ class Index extends React.Component{
         </div>
 
         {values && values.map((item, i) => {
-          let price = `$ ${item.price / 100}`;
-          let colors = Object.values(item.colors).length;
-          let colorText = colors > 0 ? `${colors} Colors Available` : 'No Colors';
-
-          return (
-            <div className="flex-row" key={i}>
-              <div className="img">
-                <img src={item.featured_image} />
-              </div>
-              <div>{item.title}</div>
-              <div>{price}</div>
-              <div className="img">{colorText}</div>
-            </div>
-          )
+          return <Product currentItem={item} key={i}/>
         })}
       </div>
     )
