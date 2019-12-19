@@ -14,13 +14,22 @@ class Product extends React.Component{
     super();
     this.state = {
       featured_image: '',
-      item: {}
+      item: {},
+      price: '',
+      colors: [],
+      colorKeys: [],
+      colorText: 'No Colors'
     }
   }
 
   componentWillMount() {
     this.setState({featured_image: this.props.currentItem.featured_image});
     this.setState({item: this.props.currentItem});
+    this.setState({price: `$ ${this.props.currentItem.price / 100}`});
+    this.setState({colors: Object.values(this.props.currentItem.colors)}, () => {
+      this.setState({colorText: this.state.colors.length > 0 ? `${this.state.colors.length} Colors Available` : 'No Colors'})
+    });
+    this.setState({colorsKeys: Object.keys(this.props.currentItem.colors)});
   }
 
   handleHover = (item) => {
@@ -32,31 +41,25 @@ class Product extends React.Component{
   }
 
   render(){
-    let item = this.props.currentItem;
-    let price = `$ ${item.price / 100}`;
-    let colorsKeys = Object.keys(item.colors);
-    let colors = Object.values(item.colors);
-    let colorText = colors.length > 0 ? `${colors.length} Colors Available` : 'No Colors';
-
     return (
       <div className="flex-row">
         <div className="img">
           <img src={this.state.featured_image} />
         </div>
-        <div>{item.title}</div>
-        <div>{price}</div>
+        <div>{this.state.item.title}</div>
+        <div>{this.state.price}</div>
         <div className="img">
-        <p>{colorText}</p>
-          {colors.length > 0 && (
+        <p>{this.state.colorText}</p>
+          {this.state.colors.length > 0 && (
             <div className="colors">
-              {colors && colors.map((color, i) => {
+              {this.state.colors && this.state.colors.map((color, i) => {
                 return (
                   <div key={i}
                     onClick={this.handleClickedColor.bind(this, color)}
                     onMouseEnter={this.handleHover.bind(this, color)}
                     className="color-box"
                     style={{
-                      background: colorMap.get(colorsKeys[i]),
+                      background: colorMap.get(this.state.colorsKeys[i]),
                     }}>
                   </div>
                 )
