@@ -18,7 +18,8 @@ class Product extends React.Component{
       price: '',
       colors: [],
       colorKeys: [],
-      colorText: 'No Colors'
+      colorText: 'No Colors',
+      activeIndex: 0
     }
   }
 
@@ -39,8 +40,9 @@ class Product extends React.Component{
     this.setState({featured_image: item.hover ? item.featured : item})
   }
 
-  handleClickedColor = (item) => {
-    this.setState({featured_image: item.featured ? item.featured : item});
+  handleClickedColor = (res) => {
+    this.setState({activeIndex: res.index});
+    this.setState({featured_image: res.color.featured ? res.color.featured : res.color});
   }
 
   render(){
@@ -58,8 +60,7 @@ class Product extends React.Component{
             {this.state.colors && this.state.colors.map((color, i) => {
               return (
                 <div key={i}
-                  onClick={this.handleClickedColor.bind(this, color)}
-                  onMouseLeave={this.handleMouseLeave}
+                  onClick={this.handleClickedColor.bind(this, {color: color, index: i})}
                   onMouseEnter={this.handleHover.bind(this, color)}
                   className="color-box"
                   style={{
