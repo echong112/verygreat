@@ -30,8 +30,6 @@ class Product extends React.Component{
     this.setState({featured_image: item.featured ? item.featured : item})
   }
 
-
-
   render(){
     let item = this.props.currentItem;
     let price = `$ ${item.price / 100}`;
@@ -47,7 +45,7 @@ class Product extends React.Component{
         <div>{item.title}</div>
         <div>{price}</div>
         <div className="img">
-          <p>{colorText}</p>
+        <p>{colorText}</p>
           {colors.length > 0 && (
             <div className="colors">
               {colors && colors.map((color, i) => {
