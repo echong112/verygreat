@@ -25,6 +25,13 @@ class Product extends React.Component{
     this.setState({featured_image: item.hover ? item.featured : item})
   }
 
+  handleClickedColor = (item) => {
+    console.log(item);
+    this.setState({featured_image: item.featured ? item.featured : item})
+  }
+
+
+
   render(){
     let item = this.props.currentItem;
     let price = `$ ${item.price / 100}`;
@@ -46,6 +53,7 @@ class Product extends React.Component{
               {colors && colors.map((color, i) => {
                 return (
                   <div key={i}
+                    onClick={this.handleClickedColor.bind(this, color)}
                     onMouseEnter={this.handleHover.bind(this, color)}
                     className="color-box"
                     style={{
