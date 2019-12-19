@@ -18,11 +18,11 @@ class Product extends React.Component{
   }
 
   componentWillMount() {
-    this.setState({featured_image: this.props.currentItem.featured_image})
+    this.setState({featured_image: this.props.currentItem.featured_image});
   }
 
   handleHover = (item) => {
-    this.setState({featured_image: item.hover ? item.hover : item})
+    this.setState({featured_image: item.hover ? item.featured : item})
   }
 
   render(){
@@ -31,7 +31,7 @@ class Product extends React.Component{
     let colorsKeys = Object.keys(item.colors);
     let colors = Object.values(item.colors);
     let colorText = colors.length > 0 ? `${colors.length} Colors Available` : 'No Colors';
-    let featuredImage = item.featured_image;
+
     return (
       <div className="flex-row">
         <div className="img">
