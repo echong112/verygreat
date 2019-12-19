@@ -1,0 +1,40 @@
+.flex-row {
+  display: flex;
+  width: 100%;
+  border: 1px grey solid;
+  border-bottom: none;
+  
+  & > div {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid grey;
+    text-align: center;
+
+    &:last-of-type {
+      border: none;
+    }
+
+    &.img {
+      width: 30%;
+      padding: 25px;
+    }
+  }
+  img {
+    width: 70%;
+    margin: auto;
+  }
+}
+
+.table-header {
+  background: grey;
+  color: white;
+  font-weight: bold;
+}
+
+.product-table {
+  max-width: 1024px;
+  width: 100%;
+  margin: auto;
+}
