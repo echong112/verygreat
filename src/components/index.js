@@ -23,20 +23,19 @@ class Index extends React.Component{
           <div className="img">Number of Colors</div>
         </div>
 
-        {values && values.map(item => {
+        {values && values.map((item, i) => {
+          let price = `$ ${item.price / 100}`;
           let colors = Object.values(item.colors).length;
+          let colorText = colors > 0 ? `${colors} Colors Available` : 'No Colors';
+
           return (
-            <div className="flex-row">
+            <div className="flex-row" key={i}>
               <div className="img">
                 <img src={item.featured_image} />
               </div>
               <div>{item.title}</div>
-              <div>{`$ ${item.price / 100}`}</div>
-              
-              <div className="img">{
-                colors > 0 ?
-                  `${colors} Colors Available` :
-                  'No Colors'}</div>
+              <div>{price}</div>
+              <div className="img">{colorText}</div>
             </div>
           )
         })}
