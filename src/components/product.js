@@ -13,12 +13,14 @@ class Product extends React.Component{
   constructor(props){
     super();
     this.state = {
-      featured_image: ''
+      featured_image: '',
+      item: {}
     }
   }
 
   componentWillMount() {
     this.setState({featured_image: this.props.currentItem.featured_image});
+    this.setState({item: this.props.currentItem});
   }
 
   handleHover = (item) => {
@@ -26,7 +28,6 @@ class Product extends React.Component{
   }
 
   handleClickedColor = (item) => {
-    console.log(item);
     this.setState({featured_image: item.featured ? item.featured : item})
   }
 
