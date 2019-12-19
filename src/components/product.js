@@ -10,7 +10,7 @@ colorMap.set('Black', '#000000')
 colorMap.set('Gray', '#808080')
 
 class Product extends React.Component{
-  constructor(props){
+  constructor(){
     super();
     this.state = {
       featured_image: '',
@@ -40,7 +40,7 @@ class Product extends React.Component{
   }
 
   handleClickedColor = (item) => {
-    this.setState({featured_image: item.featured ? item.featured : item})
+    this.setState({featured_image: item.featured ? item.featured : item});
   }
 
   render(){
@@ -59,6 +59,7 @@ class Product extends React.Component{
               return (
                 <div key={i}
                   onClick={this.handleClickedColor.bind(this, color)}
+                  onMouseLeave={this.handleMouseLeave}
                   onMouseEnter={this.handleHover.bind(this, color)}
                   className="color-box"
                   style={{
