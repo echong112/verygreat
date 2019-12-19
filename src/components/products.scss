@@ -56,8 +56,12 @@
 .color-box {
   height: 25px;
   width: 25px;
-  border: 1px solid rgb(211, 211, 211);
+  border: 3px solid rgb(240, 237, 237);
   cursor: pointer;
+
+  &.active {
+    border: black 3px solid;
+  }
 }
 
 .colors {

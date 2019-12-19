@@ -36,10 +36,6 @@ class Product extends React.Component{
     }
   }
 
-  handleHover = (item) => {
-    this.setState({featured_image: item.hover ? item.featured : item})
-  }
-
   handleClickedColor = (res) => {
     this.setState({activeIndex: res.index});
     this.setState({featured_image: res.color.featured ? res.color.featured : res.color});
@@ -61,8 +57,7 @@ class Product extends React.Component{
               return (
                 <div key={i}
                   onClick={this.handleClickedColor.bind(this, {color: color, index: i})}
-                  onMouseEnter={this.handleHover.bind(this, color)}
-                  className="color-box"
+                  className={`color-box ${i === this.state.activeIndex ? 'active' : ''}`}
                   style={{
                     background: colorMap.get(this.state.colorsKeys[i]),
                   }}>
